@@ -1,0 +1,11 @@
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\bin\Debug\netcoreapp3.1\Capstone_TaskList.exe
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\bin\Debug\netcoreapp3.1\Capstone_TaskList.deps.json
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\bin\Debug\netcoreapp3.1\Capstone_TaskList.runtimeconfig.json
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\bin\Debug\netcoreapp3.1\Capstone_TaskList.runtimeconfig.dev.json
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\bin\Debug\netcoreapp3.1\Capstone_TaskList.dll
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\bin\Debug\netcoreapp3.1\Capstone_TaskList.pdb
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\obj\Debug\netcoreapp3.1\Capstone_TaskList.csprojAssemblyReference.cache
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\obj\Debug\netcoreapp3.1\Capstone_TaskList.AssemblyInfoInputs.cache
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\obj\Debug\netcoreapp3.1\Capstone_TaskList.AssemblyInfo.cs
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\obj\Debug\netcoreapp3.1\Capstone_TaskList.dll
+C:\Users\young\Desktop\bootcampAssigns\CapStones\Capstone_TaskList\obj\Debug\netcoreapp3.1\Capstone_TaskList.pdb
