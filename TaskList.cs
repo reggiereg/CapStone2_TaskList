@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Capstone_TaskList
 {
@@ -97,7 +98,7 @@ namespace Capstone_TaskList
         public static List<TaskList> DeleteTask(string errorMessage, int itemNum, List<TaskList> listOfTasks)
         {
             string userInput;
-            userInput = newTaskData($"Are you sure you want to delete this task:\n{listOfTasks[itemNum].Name}\n{listOfTasks[itemNum].Description}\nDue on: {listOfTasks[itemNum].Description}?");
+            userInput = newTaskData($"Are you sure you want to delete this task:\n     Assigned to: {listOfTasks[itemNum].Name}\n     Description: {listOfTasks[itemNum].Description}\n     Due on: {listOfTasks[itemNum].Description}?\n[y/n]: ");
 
 
             if (userInput == "y")
@@ -145,7 +146,7 @@ namespace Capstone_TaskList
             }
         }
 
-            public static DateTime Date_D(string date)
+        private static DateTime Date_D(string date)
         {
             int count = 0;
             string userInput = "";
@@ -173,6 +174,15 @@ namespace Capstone_TaskList
             Console.Write(message);
             userInput = Console.ReadLine();
             return userInput;
+        }
+
+        public static List<TaskList> MarkTaskComplete(List<TaskList> existingTasks, int itemNumber)
+        {
+            existingTasks[itemNumber -1].completed = true;
+
+            Console.WriteLine("Task has been marked as completed successfully.");
+            Thread.Sleep(3500);
+            return existingTasks;
         }
 
     }

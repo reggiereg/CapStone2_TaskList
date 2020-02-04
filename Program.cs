@@ -21,10 +21,10 @@ namespace Capstone_TaskList
             int userOption;
             List<TaskList> tasks = new List<TaskList>
             {
-                new TaskList("Reginald Richardson", "Create the Print Menu for Tasks Capstone", DateTime.Parse("01/31/2020"), true, 1),
+                new TaskList("Reginald Richardson", "Create the Print Menu for Tasks Capstone", DateTime.Parse("01/31/2020"), false, 1),
                 new TaskList("Reginald Richardson", "Create the Task class", DateTime.Parse("01/31/2020"), true, 2),
                 new TaskList("Reginald Richardson", "Create the default Task list in my program", DateTime.Parse("01/31/2020"), true, 3),
-                new TaskList("Reginald Richardson", "Create the validation methods for user input", DateTime.Parse("01/31/2020"), true, 4),
+                new TaskList("Reginald Richardson", "Create the validation methods for user input", DateTime.Parse("01/31/2020"), false, 4),
                 new TaskList("Reginald Richardson", "Create the add task method", DateTime.Parse("01/31/2020"), true, 5)
             };
 
@@ -32,11 +32,12 @@ namespace Capstone_TaskList
             {
                 PrintMenu();
                 userOptionToTest = SelectTaskOption("ENTER YOUR OPTION: ");
-                userOption = TaskOptSelectValidation(errorMessages, userOptionToTest, 1, 5);
+                userOption = TaskOptSelectValidation(tasks, errorMessages[1], userOptionToTest, 1, 5);
                 
                 switch(userOption)
                 {
                     case 1:
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.Clear();
                         TaskList.ListTasks(tasks);
                         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -45,6 +46,7 @@ namespace Capstone_TaskList
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case 2:
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.Clear();
                         TaskList.AddTask(tasks);
                         Console.Clear();
@@ -58,6 +60,8 @@ namespace Capstone_TaskList
                         break;
 
                     case 3:
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Clear();
                         int i = 1;
                         int originalCount = tasks.Count;
                         int taskToDelete;
@@ -66,17 +70,31 @@ namespace Capstone_TaskList
                             Console.WriteLine($"{i}. {task.Description}");
                             i++;
                         }
-                        taskToDelete = TaskOptSelectValidation(errorMessages, SelectTaskOption("Enter in the corresponding number for the task you would like to delete: "), 1, tasks.Count);
+                        Console.Write("\n");
+                        taskToDelete = TaskOptSelectValidation(tasks, errorMessages[1], SelectTaskOption("Enter in the corresponding number for the task you would like to delete: "), 1, tasks.Count);
                         TaskList.DeleteTask(errorMessages[2],taskToDelete -1, tasks);
                         if (originalCount > tasks.Count)
                         {
                             Console.WriteLine($"Task {taskToDelete} deleted successfully");
                         }
                         break;
+
+                    case 4:
+                        Console.Clear();
+                        int x = 1;
+                        foreach (TaskList task in tasks)
+                        {
+                            Console.WriteLine($"{x}. {task.Description} {task.Completed}");
+                            x++;
+                        }
+                        int taskToComplete = TaskOptSelectValidation(tasks, errorMessages[1], SelectTaskOption("Please enter the number of the item that you would like to mark as Complete: "), 1, tasks.Count);
+                        TaskList.MarkTaskComplete(tasks, taskToComplete);
+                        break;
                     case 5:
                         Continue = false;
                         break;
                 }
+                Console.Clear();
             }
         }
 
@@ -88,12 +106,12 @@ namespace Capstone_TaskList
         public static string SelectTaskOption(string message)
         {
             string userInput;
-            Console.Write(message);
+            Console.WriteLine(message);
             userInput = Console.ReadLine();
             return userInput;
         }
 
-        public static int TaskOptSelectValidation(List<string> errorMessages, string userInput, int option1, int optionMax)
+        public static int TaskOptSelectValidation(List<TaskList> tasks, string errorMessages, string userInput, int option1, int optionMax)
         {
             int userOption;
             try
@@ -112,7 +130,7 @@ namespace Capstone_TaskList
                 Console.ForegroundColor = ConsoleColor.White;
                 PrintMenu();
                 userOptionError = SelectTaskOption("ENTER YOUR OPTION: ");
-                return TaskOptSelectValidation(errorMessages, userOptionError, 1, 5);
+                return TaskOptSelectValidation(tasks, errorMessages, userOptionError, 1, 5);
             }
 
             if(userOption >= option1 && userOption <= optionMax)
@@ -122,15 +140,17 @@ namespace Capstone_TaskList
             else
             {
                 string userOptionError;
+                //Console.ForegroundColor = ConsoleColor.Red;
+                Console.Clear();
+                int i = 0;
+                foreach(TaskList task in tasks)
+                {
+                    Console.WriteLine($"{i+1}. {task.Description}");
+                    i++;
+                }
+                Console.Write("\n");
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Clear();
-                Console.WriteLine($"{errorMessages[1]}{userOption}.");
-                Thread.Sleep(3500);
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.White;
-                PrintMenu();
-                userOptionError = SelectTaskOption("ENTER YOUR OPTION: ");
-                return TaskOptSelectValidation(errorMessages, userOptionError, 1, 5);
+                return TaskOptSelectValidation(tasks, errorMessages,SelectTaskOption($"{errorMessages} {userOption}. Please enter in a value between {option1} and {optionMax}:  "),option1, optionMax);
             }
             return userOption;
         }
